@@ -21,12 +21,12 @@ h1{font-size:1.25rem;margin:0 0 4px;color:var(--red)}
 .track{height:6px;background:var(--line);border-radius:3px;overflow:hidden;margin-bottom:16px}
 .track i{display:block;height:100%;width:0;background:var(--ok);transition:width .3s}
 .scene{perspective:1200px}
-.card{position:relative;min-height:280px;cursor:pointer;transform-style:preserve-3d;transition:transform .45s}
+.card{position:relative;min-height:340px;cursor:pointer;transform-style:preserve-3d;transition:transform .45s}
 .card.flip{transform:rotateY(180deg)}
 .face{position:absolute;inset:0;backface-visibility:hidden;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;overflow:auto}
 .face.back{transform:rotateY(180deg);border-color:var(--red)}
 .tag{font-size:.75rem;color:var(--mute);margin-bottom:10px}
-.txt{font-size:1.2rem;font-weight:600}
+.txt{font-size:1.1rem;font-weight:600;white-space:pre-line}
 .back .txt{color:var(--red)}
 .row{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}
 .row button{flex:1;min-width:90px;padding:12px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit;cursor:pointer}
@@ -38,8 +38,8 @@ button:focus-visible{outline:3px solid var(--red);outline-offset:2px}
 .mode button{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:6px 14px;border-radius:8px;font:inherit;font-size:.875rem;cursor:pointer}
 .mode button[aria-pressed="true"]{border-color:var(--red);color:var(--red);font-weight:600}
 #quiz{min-height:280px}
-#quiz .qq{font-size:1.15rem;font-weight:600;margin:0 0 14px}
-.opt{display:block;width:100%;text-align:left;margin-bottom:8px;padding:12px 14px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit;cursor:pointer}
+#quiz .qq{font-size:1.1rem;font-weight:600;margin:0 0 14px}
+.opt{white-space:pre-line;display:block;width:100%;text-align:left;margin-bottom:8px;padding:12px 14px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit;cursor:pointer}
 .opt.right{border:2px solid var(--ok);color:var(--ok);font-weight:600}
 .opt.wrong{border:2px solid var(--red);color:var(--red)}
 .sc{font-size:.875rem;color:var(--mute);margin-top:8px}
@@ -71,75 +71,111 @@ button:focus-visible{outline:3px solid var(--red);outline-offset:2px}
 </main>
 <script>
 var D={
-"1. Con số":[
-["Cửa sổ viêm gan B / C / giang mai?","4 tuần / 12 tuần / 4-8 tuần"],
-["Bảo quản tối đa máu toàn phần ở 2-6°C?","42 ngày"],
-["Khoảng cách 2 lần hiến: máu toàn phần / tiểu cầu / huyết tương?","84 ngày / 21 ngày / 14 ngày"],
-["Nhiệt độ bảo quản huyết tương 1 năm?","-25°C"],
-["Thalassemia có bao nhiêu mức độ bệnh?","5"],
-["Đời sống của hồng cầu?","90-120 ngày"],
-["Mỗi ngày thay thế bao nhiêu ml (huyết tương)?","40-80ml"],
-["Mỗi ngày thay thế bao nhiêu hồng cầu?","200-400 tỷ"],
-["Khả năng sinh máu của tủy xương gấp bao nhiêu lần khi cần?","4 đến 10 lần"],
-["Tổng lượng máu bằng bao nhiêu phần trọng lượng cơ thể? Trung bình?","1/13; 70ml/kg"],
-["Tỷ lệ nhóm máu Rh- tại Việt Nam?","0,04-0,07%"],
-["Huyết sắc tố tối thiểu để hiến máu?","120g/lít"],
-["Quy chế 2007: không hiến quá bao nhiêu/ngày? Người 45kg hiến?","500ml/ngày; 350ml"]],
-"2. Thalassemia":[
-["Thalassemia là bệnh lý của tế bào nào?","Hồng cầu"],
-["Có mấy nhóm bệnh Thalassemia?","2: Alpha và Beta"],
-["Mắc Thalassemia bằng con đường nào?","Di truyền"],
-["Biểu hiện thường gặp?","Thấp nhỏ, chậm phát triển, trán dô, mũi tẹt, mắt xếch"],
-["Bố mẹ đều thalassemia nhẹ, con mang gen bệnh? (đề cương)","50%"]],
-"3. Máu và sau hiến":[
-["Máu gồm mấy thành phần chính?","2: Các tế bào máu và huyết tương"],
-["Máu sinh ra ở đâu?","Tủy xương"],
-["Thành phần chứa huyết sắc tố làm máu đỏ?","Hồng cầu"],
-["Chức năng của bạch cầu?","Phát hiện và tiêu diệt vật lạ gây bệnh"],
-["Thành phần chính của huyết tương?","Nước"],
-["Thành phần phục hồi nhanh nhất sau hiến máu?","Huyết tương"],
-["Màu huyết tương thay đổi phụ thuộc?","Theo thời gian"],
-["Có bao nhiêu hệ nhóm máu chính?","2"],
-["Ai phát minh hệ nhóm máu ABO?","Karl Landsteiner"],
-["Bầm tím, đau, sưng sau hiến máu là do?","Vỡ ven"],
-["Xử lý bầm tím sau hiến máu?","2 ngày đầu chườm lạnh, sau đó chườm nóng 2-4 lần/ngày"],
-["Chảy máu tại chỗ sau hiến máu?","Giơ cao tay, tay kia ấn nhẹ vào bông/băng dính, sau đó thay miếng khác"],
-["Thực phẩm ức chế tạo máu?","Đồ chua"],
-["Điều kiện quan trọng nhất khi hiến máu?","Hoàn toàn tự nguyện"],
-["Vì sao có giấy chứng nhận vẫn mất tiền khi truyền máu?","Chi phí xử lý, bảo quản, vận chuyển và phí truyền máu"],
-["Rh... truyền máu Rh... lần đầu: tai biến..., vì cần... để kháng thể đạt mức ngưng kết","Dương, âm, chưa xảy ra, phải cần một thời gian để"]],
-"4. Chi hội 08/5":[
-["Chi hội thành lập ngày nào? Năm nay bao nhiêu tuổi?","05/12/2015; 10 tuổi"],
-["Thành lập tại đâu, trong sự kiện nào?","Công viên Hòa Bình, Ngày hội Trái Tim Tình Nguyện"],
-["Ý nghĩa tên 08/5?","Ngày Quốc tế Chữ thập đỏ và Ngày Thalassemia Thế giới"],
-["Chi hội ca / Xung kích ca?","Ngồi lại bên nhau / Sống như những đóa hoa"],
-["Slogan của Chi hội?","Sống như đóa hoa"],
-["Phương châm hoạt động?","“Học tập hết mình vì lập thân lập nghiệp - Tình nguyện hết mình vì sự sống người bệnh”"],
-["Khu vực hoạt động?","Cầu Giấy, một phần Tây Hồ"],
-["Tách ra từ các Chi hội nào?","Chi hội 06/01 và 24/01"],
-["Số Đội / nguyên tắc / kim chỉ nam / Chi hội trưởng?","6 / 5 / 6 / 7"],
-["Chương trình hiến máu lớn nhất? Có mấy chương trình lớn?","Ngày Chung Đôi; 3"],
-["Chương trình lớn dịp đầu xuân?","Xuân Tình Nguyện"],
-["Bài nhảy: Xuân Tình Nguyện / Ruy Băng Vàng / Ngày Chung Đôi?","Xuân ơi ở lại chơi / Trái tim vàng son / Ngày Chung Đôi"],
-["Điểm hiến máu cố định?","Số 18 Quán Sứ"],
-["Chi hội trưởng F1 / F2,3 / F4?","Trịnh Xuân Thủy / Hoàng Văn Hải / Nguyễn Hữu Trường"],
-["Chi hội trưởng F5,6 / F7,8 / F9?","Đậu Quang Huy / Đinh Văn Đạt / Phạm Trung Hiếu"],
-["Chi hội trưởng F10 / hiện tại?","Trương Trà My / Phan Hải Đăng"],
-["Đại hội thể thao Hội máu 2024, bóng đá nữ?","Huy chương vàng"],
-["Thông điệp Ngày Chung Đôi 2024? Tổ chức tháng nào?","Mùa sẻ chia - mùa yêu thương; tháng 9, 10"],
-["Đội thành lập sớm nhất / đội em út?","Giao Thông / Du Lịch"]],
-"5. Sáu Đội":[
-["Giao Thông: thành lập, đội ca, đội trưởng?","19/03/1995; Lá cờ; Nguyễn Minh Tuấn. CT toàn trường: Khoảnh Khắc"],
-["Điện Lực: thành lập, đội ca, đội trưởng?","26/10/2006; Khúc yêu thương; Đào Văn Lâm"],
-["Điện Lực: slogan?","Máu Điện Lực - Nhanh như điện - Mạnh như lực"],
-["Cao Sư Mẫu: thành lập, đội ca, đội trưởng?","10/10/2007; Khát vọng tuổi trẻ; Nguyễn Thị Đàm Thư"],
-["Cao Sư Mẫu: slogan?","Cao Sư Mẫu - Chúng ta là một gia đình"],
-["Hành Chính: thành lập, đội ca, đội trưởng?","10/5/2008; Võ đường trúc lâm; Lê Bích Phượng"],
-["Hành Chính: slogan?","Sống hết mình - Chinh phục ước mơ"],
-["Thủ Đô: thành lập, đội ca, đội trưởng?","05/06/2016; Đến với con người Việt Nam tôi; Trần Thị Dịu"],
-["Thủ Đô: slogan, ngày truyền thống, số CT toàn trường?","Máu Thủ đô - Sống xứng đáng; 14/4; 2 chương trình"],
-["Du Lịch: thành lập, đội ca, đội trưởng?","15/12/2016; Sát cánh bên nhau; Nguyễn Ngọc Ánh"],
-["Du Lịch: slogan?","Cho đời xanh - Thêm mầm sống"]]
+"I. Máu, truyền máu, Thalassemia":[
+['1. Máu gồm mấy thành phần chính? Đó là những thành phần nào?','2: Các tế bào máu và Huyết tương.'],
+['2. Giai đoạn cửa sổ của bệnh viêm gan B, viêm gan C, giang mai lần lượt là?','4 tuần, 12 tuần, 4 - 8 tuần.'],
+['3." Thông thường, khi người Rh... được truyền máu Rh.. lần đầu tiên, tai biến truyền máu... vì nồng độ kháng thể...đạt đến nồng độ gây ngưng kết”. Điền vào chỗ chấm?','Dương, âm, chưa xảy ra, phải cần một thời gian để.'],
+['4. Thời gian bảo quản tối đa của máu toàn phần ở 2 - 6 độ C là bao lâu?','42 ngày.'],
+['5. Khoảng cách giữa 2 lần hiến máu toàn phần, 2 lần hiến tiểu cầu, 2 lần hiến huyết tương lần lượt là?','84 ngày, 21 ngày, 14 ngày.'],
+['6. Nhiệt độ bảo quản huyết tương trong thời gian 1 năm là bao nhiêu?','(-25) độ'],
+['7. Thalassemia có bao nhiêu mức độ bệnh?','5.'],
+['8. Đời sống của hồng cầu là bao lâu?','90-120 ngày.'],
+['13. (đề cương bị mất phần đầu câu) ... phục nhanh nhất sau hiến máu?','Huyết tương.'],
+['14. Mỗi ngày sẽ có khoảng bao nhiêu ml được thay thế?','40-80ml.'],
+['15. Điền vào chỗ trống: "Khả năng sinh máu của tủy xương là rất lớn, có thể gấp.... so với nhu cầu bình thường của cơ thể khi cần."','4 đến 10 lần.'],
+['16. Máu được sinh ra ở đâu?','Tủy xương.'],
+['17. Biểu hiện thường gặp của bệnh nhân Thalassemia là gì?','Thể trạng thấp nhỏ, chậm phát triển, trán dô, mũi tẹt, mắt xếch.'],
+['18. Hiện tượng sau khi hiến máu xuất hiện vết bầm tím hơi đau và sưng tại chỗ lấy máu là do?','Vỡ ven.'],
+['19. Huyết tương có màu sắc thay đổi phụ thuộc?','Theo thời gian.'],
+['20. Có bao nhiêu hệ nhóm máu chính?','2.'],
+['21. Mỗi ngày có bao nhiêu lượng hồng cầu được thay thế?','200-400 tỷ.'],
+['22. Tổng lượng máu trong cơ thể người bằng bao nhiêu phần trọng lượng của cơ thể?','1/13.'],
+['23. Tỷ lệ nhóm máu Rh- tại Việt Nam là bao nhiêu?','0,04-0,07%.'],
+['24. Điền vào chỗ trống: “Theo quy chế truyền máu 2007, mỗi lần hiến dưới 9 ml máu/kg, không hiến quá ……. là không ảnh hưởng tới sức khỏe. Như vậy, một người 45kg có khoảng trên 3500ml máu và có thể hiến ………. máu mà không ảnh hưởng tới sức khỏe.”','500ml/ngày, 350ml.'],
+['25. Sau khi hiến máu, nếu phát hiện chảy máu tại chỗ nên làm gì?','Giơ cao tay, lấy tay kia ấn nhẹ vào miếng bông hay băng dính, sau đó thay miếng bông và băng dính khác.'],
+['26. Trong cơ thể người khỏe mạnh, lượng máu trung bình khoảng bao nhiêu?','70ml/kg.'],
+['27. Thành phần chính của huyết tương là gì?','Nước.'],
+['28. Sau khi hiến máu, nếu xuất hiện bầm tím tại chỗ thì nên làm gì?','Hai ngày đầu sau hiến máu, chườm lạnh tại chỗ, những ngày sau chườm mở mở nóng 2-4 lần/1 ngày. (đề cương ghi "mở mở", ý đúng: chườm nóng)'],
+['29. Thành phần nào dưới đây chứa huyết sắc tố làm cho máu có màu đỏ?','Hồng cầu.'],
+['30. Chức năng của bạch cầu là gì?','Phát hiện và tiêu diệt các vật lạ gây bệnh.'],
+['31. Nồng độ huyết sắc tố trong máu là bao nhiêu thì được tham gia hiến máu?','120g/lít.'],
+['32. Điều kiện quan trọng nhất khi tham gia hiến máu tình nguyện là gì?','Hoàn toàn tự nguyện.'],
+['33. Thực phẩm gây ức chế quá trình tạo máu?','Đồ chua.'],
+['34. Tại sao người tham gia hiến máu tình nguyện khi cần truyền máu (có giấy chứng nhận, bệnh viện đó là công lập) vẫn mất tiền trong khi trên giấy chứng nhận viết rõ là “bồi hoàn lại lượng máu mà mình đã hiến hoàn toàn miễn phí”?','Đó là chi phí cho việc xử lý, bảo quản, chi phí vận chuyển… và cả tiền phí cho việc truyền máu.'],
+['35. Nếu bố và mẹ đều bị bệnh thalassemia mức độ nhẹ thì sinh con ra khả năng con sinh ra mang gen bệnh là bao nhiêu?','50%.'],
+['36. Giấy chứng nhận tham gia hiến máu của người tham gia hiến máu có tác dụng bồi hoàn lượng máu đã hiến tại các bệnh viện công lập trên cả nước đối với đối tượng nào?','Người tham gia hiến máu.'],
+['37. Hệ nhóm máu ABO do ai phát minh?','Karl LandSteiner.'],
+['38. Thalassemia là bệnh lý của tế bào nào?','Hồng cầu.'],
+['39. Có bao nhiêu nhóm bệnh Thalassemia? Đó là những nhóm bệnh nào?','2: Alpha Thalassemia và Beta Thalassemia.'],
+['40. Một người có thể mắc bệnh Thalassemia bằng con đường nào?','Di truyền.']],
+"II. Chi hội 08/5":[
+['1. Tên đầy đủ của Chi hội là gì?','Chi hội Thanh niên vận động hiến máu 08/5.'],
+['2. Tên Chi hội có ý nghĩa gì?','Ngày Quốc tế Chữ thập đỏ.\nNgày Thalassemia Thế giới.'],
+['3. Chi hội Thanh niên vận động hiến máu 08/5 được thành lập vào thời gian nào?','Ngày 05/12/2015.'],
+['4. Chi hội ca Chi hội máu 08/5 là bài hát nào?','Ngồi lại bên nhau.'],
+['5. Chi hội máu 08/5 được thành lập tại đâu, trong sự kiện nào?','Tại Công viên Hòa Bình trong Ngày hội Trái Tim Tình Nguyện.'],
+['6. Xung kích ca của Chi hội máu 08/5 là bài hát nào?','Sống như những đóa hoa.'],
+['8. Chi hội Thanh niên vận động hiến máu 08/5 có bao nhiêu Đội tuyên truyền viên trực thuộc?','6'],
+['9. Slogan của Chi hội máu 08/5 là?','Sống như đóa hoa.'],
+['16. Kể tên các Đội tuyên truyền viên trực thuộc Chi hội máu 08/5?','- ĐỘI THANH NIÊN VẬN ĐỘNG HIẾN MÁU TRƯỜNG ĐH GIAO THÔNG VẬN TẢI.\n- CLB THANH NIÊN VẬN ĐỘNG HIẾN MÁU ĐẠI HỌC ĐIỆN LỰC.\n- CLB THANH NIÊN TÌNH NGUYỆN VẬN ĐỘNG HIẾN MÁU NHÂN ĐẠO TRƯỜNG CAO ĐẲNG SƯ PHẠM TRUNG ƯƠNG.\n- CLB THANH NIÊN VẬN ĐỘNG HIẾN MÁU HỌC VIỆN HÀNH CHÍNH QUỐC GIA.\n- CLB THANH NIÊN VẬN ĐỘNG HIẾN MÁU TRƯỜNG ĐẠI HỌC THỦ ĐÔ HÀ NỘI.\n- CLB THANH NIÊN VẬN ĐỘNG HIẾN MÁU TRƯỜNG CAO ĐẲNG DU LỊCH HÀ NỘI.'],
+['17. Chi hội máu 08/5 hoạt động ở khu vực nào?','Khu vực Cầu Giấy, 1 phần Tây Hồ.'],
+['18. Chi hội máu 08/5 được tách ra từ các Chi hội nào?','Chi hội 06/01 và Chi hội 24/01.'],
+['19. Chi hội hiện có bao nhiêu Chi hội trưởng đã và đang đương nhiệm?','7'],
+['20. Chi hội trưởng đầu tiên của Chi hội máu 08/5 là ai?','Anh Trịnh Xuân Thủy.'],
+['21. Chi hội 08/5 có bao nhiêu nguyên tắc hoạt động?','5'],
+['22. Phương châm hoạt động của Chi hội là?','“ Học tập hết mình vì lập thân lập nghiệp - Tình nguyện hết mình vì sự sống người bệnh”'],
+['23. Có bao nhiêu kim chỉ nam hoạt động?','6'],
+['24. 6 Kim chỉ nam là?','- Gắn kết 06 Đội thành 1 tập thể thống nhất đoàn kết.\n- Chủ động và tăng cường đào tạo\n- Phát triển quy mô các chương trình hiến máu lớn\n- Đẩy mạnh các hoạt động về sở thích và tài năng\n- Xây dựng có hệ thống các quy mô hđ hiệu quả\n- Sáng tạo, đổi mới, năng động nhưng vẫn gìn giữ và phát huy truyền thống'],
+['25. Chương trình hiến máu lớn nhất của Chi hội máu 08/5 là?','Ngày Chung Đôi'],
+['26. Cơ cấu tổ chức Ban chấp hành của Chi hội bao gồm?','Tình nguyện viên, Ban Chấp Hành, Thường trực Ban Chấp Hành.'],
+['29. Bài nhảy chính hội của Xuân Tình Nguyện là?','Xuân ơi ở lại chơi'],
+['30. Bài nhảy chính hội của Ruy Băng Vàng là?','Trái tim vàng son'],
+['31. Bài nhảy chính hội của Ngày Chung Đôi là?','Ngày Chung Đôi'],
+['33. Chi hội máu 08/5 có bao nhiêu chương trình hiến máu lớn?','3'],
+['34. Chương trình hiến máu lớn được tổ chức vào dịp đầu xuân của Chi hội là?','Xuân Tình Nguyện'],
+['35. Chi hội máu 08/5 phụ trách tổ chức hiến máu tại điểm hiến máu cố định nào?','Số 18 Quán Sứ.'],
+['38. Chi hội trưởng đời F7, F8 là?','Anh Đinh Văn Đạt.'],
+['Chi hội trưởng đời F1 là?','Anh Trịnh Xuân Thủy'],
+['Chi hội trưởng đời F2,3 là?','Anh Hoàng Văn Hải'],
+['Chi hội trưởng đời F4 là?','Anh Nguyễn Hữu Trường'],
+['Chi hội trưởng đời F5,6 là?','Anh Đậu Quang Huy'],
+['Chi hội trưởng đời F9 là?','Anh Phạm Trung Hiếu'],
+['Chi hội trưởng đời F10 là ai?','Chị Trương Trà My'],
+['Chi hội trưởng hiện tại là?','Anh Phan Hải Đăng'],
+['36. Tại Đại hội thể thao Hội máu 2024, Chi hội 08/5 đã xuất sắc giành được giải gì trong bộ môn Bóng đá nữ?','Huy chương vàng.'],
+['37. Thông điệp của Ngày Chung Đôi 2024 là?','Mùa sẻ chia - mùa yêu thương'],
+['39. Ngày hội tình nguyện Ngày Chung Đôi thường được tổ chức vào thời gian nào?','Tháng 9, 10.'],
+['40. Đội máu được thành lập sớm nhất trong Chi hội là?','Đội Máu Giao Thông.'],
+['42. Đội máu “em út” của Chi hội ta là?','Đội Máu Du Lịch.'],
+['43. Chi hội máu 08/5 năm nay được bao nhiêu tuổi?','10']],
+"III. Sáu Đội tuyên truyền viên":[
+['Đội Máu Du Lịch được thành lập vào ngày tháng năm nào?','15/12/2016.'],
+['Slogan của Đội Máu Du Lịch là gì?','Cho đời xanh – Thêm mầm sống.'],
+['Đội ca của Đội Máu Du Lịch tên là gì?','Sát cánh bên nhau.'],
+['Đội trưởng Đội Máu Du Lịch là ai?','Chị Nguyễn Ngọc Ánh'],
+['Đội máu Điện Lực được thành lập vào thời gian nào?','Ngày 26/10/2006.'],
+['Tên đầy đủ của Đội máu Điện Lực?','CLB Thanh niên vận động hiến máu Đại học Điện Lực.'],
+['Đội trưởng Đội máu Điện Lực là ai?','Anh Đào Văn Lâm'],
+['Đội ca Đội máu Điện Lực tên là gì?','Khúc yêu thương'],
+['Slogan của Đội máu Điện Lực là gì?','Máu Điện Lực - Nhanh như điện - Mạnh như lực'],
+['Ngày thành lập của Đội máu Cao Sư Mẫu?','Ngày 10/10/2007.'],
+['Đội trưởng Đội máu Cao Sư Mẫu hiện tại là ai?','Chị Nguyễn Thị Đàm Thư'],
+['Đội ca của Đội máu Cao Sư Mẫu là?','Khát vọng tuổi trẻ.'],
+['Slogan Đội máu Cao Sư Mẫu?','Cao Sư Mẫu - Chúng ta là một gia đình'],
+['Ngày thành lập CLB Thanh niên vận động hiến máu Trường Đại học Thủ đô Hà Nội là ngày nào?','Ngày 05/06/2016.'],
+['Tên bài hát Đội ca của Đội máu Thủ đô là?','Đến với con người Việt Nam tôi.'],
+['Ngày truyền thống của Đội máu Thủ đô là ngày?','Ngày 14/4.'],
+['Đội máu Thủ đô có bao nhiêu Chương trình hiến máu toàn trường?','2.'],
+['Slogan của Đội máu Thủ Đô là?','Máu Thủ đô - Sống xứng đáng.'],
+['Đội trưởng Đội máu Thủ đô là ai?','Chị Trần Thị Dịu'],
+['Bài hát đội ca của Đội máu Giao thông là gì?','Lá cờ.'],
+['Ngày thành lập của Đội máu Giao thông?','19/03/1995.'],
+['Họ và tên đầy đủ của Đội trưởng Đội máu Giao thông?','Anh Nguyễn Minh Tuấn'],
+['Chương trình hiến máu toàn trường của Đội máu Giao thông tên là gì?','Khoảnh Khắc.'],
+['Slogan của Đội máu Hành chính là gì?','Sống hết mình – Chinh phục ước mơ'],
+['Đội trưởng Đội máu Hành chính là ai?','Chị Lê Bích Phượng'],
+['Ngày thành lập CLB Thanh niên vận động hiến máu Học viện Hành chính Quốc gia là?','Ngày 10/5/2008.'],
+['Đội ca Đội máu Hành chính là bài hát nào?','Võ đường trúc lâm']]
 };
 var names=Object.keys(D),cur=names[0],list=[],i=0,known={};
 var mode="flip",score=0,tried=0;
