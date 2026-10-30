@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Flashcard ôn thi TNV Chi hội 08/5</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#fbf6f6;--card:#fff;--ink:#2b1216;--mute:#7a5a5f;--red:#b3122b;--line:#ecd9db;--ok:#1f7a4d}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1a0f11;--card:#26161a;--ink:#f6e9ea;--mute:#b99a9e;--red:#ff6b7d;--line:#43282d;--ok:#5fd39b}}
+:root[data-theme="dark"]{--bg:#1a0f11;--card:#26161a;--ink:#f6e9ea;--mute:#b99a9e;--red:#ff6b7d;--line:#43282d;--ok:#5fd39b}
+html{color-scheme:light dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 "Be Vietnam Pro",system-ui,sans-serif}
+main{max-width:640px;margin:0 auto;padding:20px 16px 40px}
+h1{font-size:1.25rem;margin:0 0 4px;color:var(--red)}
+.sub{color:var(--mute);font-size:.875rem;margin:0 0 16px}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:8px}
+.tabs button{flex:none;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:8px 14px;border-radius:999px;font:inherit;font-size:.875rem;cursor:pointer}
+.tabs button[aria-pressed="true"]{background:var(--red);border-color:var(--red);color:#fff}
+.bar{display:flex;justify-content:space-between;align-items:center;margin:12px 0;font-size:.875rem;color:var(--mute)}
+.track{height:6px;background:var(--line);border-radius:3px;overflow:hidden;margin-bottom:16px}
+.track i{display:block;height:100%;width:0;background:var(--ok);transition:width .3s}
+.scene{perspective:1200px}
+.card{position:relative;min-height:280px;cursor:pointer;transform-style:preserve-3d;transition:transform .45s}
+.card.flip{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;overflow:auto}
+.face.back{transform:rotateY(180deg);border-color:var(--red)}
+.tag{font-size:.75rem;color:var(--mute);margin-bottom:10px}
+.txt{font-size:1.2rem;font-weight:600}
+.back .txt{color:var(--red)}
+.row{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}
+.row button{flex:1;min-width:90px;padding:12px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit;cursor:pointer}
+.row .know{background:var(--ok);border-color:var(--ok);color:#fff}
+button:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+.opts{display:flex;gap:12px;margin-top:12px;font-size:.875rem;color:var(--mute)}
+.opts label{display:flex;gap:6px;align-items:center;cursor:pointer}
+.mode{display:flex;gap:8px;margin:4px 0 8px}
+.mode button{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:6px 14px;border-radius:8px;font:inherit;font-size:.875rem;cursor:pointer}
+.mode button[aria-pressed="true"]{border-color:var(--red);color:var(--red);font-weight:600}
+#quiz{min-height:280px}
+#quiz .qq{font-size:1.15rem;font-weight:600;margin:0 0 14px}
+.opt{display:block;width:100%;text-align:left;margin-bottom:8px;padding:12px 14px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit;cursor:pointer}
+.opt.right{border:2px solid var(--ok);color:var(--ok);font-weight:600}
+.opt.wrong{border:2px solid var(--red);color:var(--red)}
+.sc{font-size:.875rem;color:var(--mute);margin-top:8px}
+@media (prefers-reduced-motion:reduce){.card{transition:none}}
+</style>
+</head>
+<body>
+<main>
+<h1>Ôn thi TNV Chi hội 08/5</h1>
+<p class="sub">Chạm vào thẻ để lật. Phím tắt: Space lật, ← → chuyển thẻ.</p>
+<div class="tabs" id="tabs"></div>
+<div class="mode"><button id="m1" aria-pressed="true">Lật thẻ</button><button id="m2" aria-pressed="false">Trắc nghiệm</button></div>
+<div class="bar"><span id="pos"></span><span id="cnt"></span></div>
+<div class="track"><i id="bar"></i></div>
+<div id="quiz" hidden></div><div class="scene"><div class="card" id="card" tabindex="0" role="button" aria-label="Lật thẻ">
+<div class="face"><div class="tag">Câu hỏi</div><div class="txt" id="q"></div></div>
+<div class="face back"><div class="tag">Đáp án</div><div class="txt" id="a"></div></div>
+</div></div>
+<div class="row">
+<button id="prev">Trước</button>
+<button id="know">Đã thuộc</button>
+<button id="next">Sau</button>
+</div>
+<div class="opts">
+<button id="shuf" style="padding:6px 12px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit;cursor:pointer">Xáo thẻ</button>
+<label><input type="checkbox" id="only"> Chỉ thẻ chưa thuộc</label>
+<button id="reset" style="margin-left:auto;padding:6px 12px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit;cursor:pointer">Xóa tiến độ</button>
+</div>
+</main>
+<script>
+var D={
+"1. Con số":[
+["Cửa sổ viêm gan B / C / giang mai?","4 tuần / 12 tuần / 4-8 tuần"],
+["Bảo quản tối đa máu toàn phần ở 2-6°C?","42 ngày"],
+["Khoảng cách 2 lần hiến: máu toàn phần / tiểu cầu / huyết tương?","84 ngày / 21 ngày / 14 ngày"],
+["Nhiệt độ bảo quản huyết tương 1 năm?","-25°C"],
+["Thalassemia có bao nhiêu mức độ bệnh?","5"],
+["Đời sống của hồng cầu?","90-120 ngày"],
+["Mỗi ngày thay thế bao nhiêu ml (huyết tương)?","40-80ml"],
+["Mỗi ngày thay thế bao nhiêu hồng cầu?","200-400 tỷ"],
+["Khả năng sinh máu của tủy xương gấp bao nhiêu lần khi cần?","4 đến 10 lần"],
+["Tổng lượng máu bằng bao nhiêu phần trọng lượng cơ thể? Trung bình?","1/13; 70ml/kg"],
+["Tỷ lệ nhóm máu Rh- tại Việt Nam?","0,04-0,07%"],
+["Huyết sắc tố tối thiểu để hiến máu?","120g/lít"],
+["Quy chế 2007: không hiến quá bao nhiêu/ngày? Người 45kg hiến?","500ml/ngày; 350ml"]],
+"2. Thalassemia":[
+["Thalassemia là bệnh lý của tế bào nào?","Hồng cầu"],
+["Có mấy nhóm bệnh Thalassemia?","2: Alpha và Beta"],
+["Mắc Thalassemia bằng con đường nào?","Di truyền"],
+["Biểu hiện thường gặp?","Thấp nhỏ, chậm phát triển, trán dô, mũi tẹt, mắt xếch"],
+["Bố mẹ đều thalassemia nhẹ, con mang gen bệnh? (đề cương)","50%"]],
+"3. Máu và sau hiến":[
+["Máu gồm mấy thành phần chính?","2: Các tế bào máu và huyết tương"],
+["Máu sinh ra ở đâu?","Tủy xương"],
+["Thành phần chứa huyết sắc tố làm máu đỏ?","Hồng cầu"],
+["Chức năng của bạch cầu?","Phát hiện và tiêu diệt vật lạ gây bệnh"],
+["Thành phần chính của huyết tương?","Nước"],
+["Thành phần phục hồi nhanh nhất sau hiến máu?","Huyết tương"],
+["Màu huyết tương thay đổi phụ thuộc?","Theo thời gian"],
+["Có bao nhiêu hệ nhóm máu chính?","2"],
+["Ai phát minh hệ nhóm máu ABO?","Karl Landsteiner"],
+["Bầm tím, đau, sưng sau hiến máu là do?","Vỡ ven"],
+["Xử lý bầm tím sau hiến máu?","2 ngày đầu chườm lạnh, sau đó chườm nóng 2-4 lần/ngày"],
+["Chảy máu tại chỗ sau hiến máu?","Giơ cao tay, tay kia ấn nhẹ vào bông/băng dính, sau đó thay miếng khác"],
+["Thực phẩm ức chế tạo máu?","Đồ chua"],
+["Điều kiện quan trọng nhất khi hiến máu?","Hoàn toàn tự nguyện"],
+["Vì sao có giấy chứng nhận vẫn mất tiền khi truyền máu?","Chi phí xử lý, bảo quản, vận chuyển và phí truyền máu"],
+["Rh... truyền máu Rh... lần đầu: tai biến..., vì cần... để kháng thể đạt mức ngưng kết","Dương, âm, chưa xảy ra, phải cần một thời gian để"]],
+"4. Chi hội 08/5":[
+["Chi hội thành lập ngày nào? Năm nay bao nhiêu tuổi?","05/12/2015; 10 tuổi"],
+["Thành lập tại đâu, trong sự kiện nào?","Công viên Hòa Bình, Ngày hội Trái Tim Tình Nguyện"],
+["Ý nghĩa tên 08/5?","Ngày Quốc tế Chữ thập đỏ và Ngày Thalassemia Thế giới"],
+["Chi hội ca / Xung kích ca?","Ngồi lại bên nhau / Sống như những đóa hoa"],
+["Slogan của Chi hội?","Sống như đóa hoa"],
+["Phương châm hoạt động?","“Học tập hết mình vì lập thân lập nghiệp - Tình nguyện hết mình vì sự sống người bệnh”"],
+["Khu vực hoạt động?","Cầu Giấy, một phần Tây Hồ"],
+["Tách ra từ các Chi hội nào?","Chi hội 06/01 và 24/01"],
+["Số Đội / nguyên tắc / kim chỉ nam / Chi hội trưởng?","6 / 5 / 6 / 7"],
+["Chương trình hiến máu lớn nhất? Có mấy chương trình lớn?","Ngày Chung Đôi; 3"],
+["Chương trình lớn dịp đầu xuân?","Xuân Tình Nguyện"],
+["Bài nhảy: Xuân Tình Nguyện / Ruy Băng Vàng / Ngày Chung Đôi?","Xuân ơi ở lại chơi / Trái tim vàng son / Ngày Chung Đôi"],
+["Điểm hiến máu cố định?","Số 18 Quán Sứ"],
+["Chi hội trưởng F1 / F2,3 / F4?","Trịnh Xuân Thủy / Hoàng Văn Hải / Nguyễn Hữu Trường"],
+["Chi hội trưởng F5,6 / F7,8 / F9?","Đậu Quang Huy / Đinh Văn Đạt / Phạm Trung Hiếu"],
+["Chi hội trưởng F10 / hiện tại?","Trương Trà My / Phan Hải Đăng"],
+["Đại hội thể thao Hội máu 2024, bóng đá nữ?","Huy chương vàng"],
+["Thông điệp Ngày Chung Đôi 2024? Tổ chức tháng nào?","Mùa sẻ chia - mùa yêu thương; tháng 9, 10"],
+["Đội thành lập sớm nhất / đội em út?","Giao Thông / Du Lịch"]],
+"5. Sáu Đội":[
+["Giao Thông: thành lập, đội ca, đội trưởng?","19/03/1995; Lá cờ; Nguyễn Minh Tuấn. CT toàn trường: Khoảnh Khắc"],
+["Điện Lực: thành lập, đội ca, đội trưởng?","26/10/2006; Khúc yêu thương; Đào Văn Lâm"],
+["Điện Lực: slogan?","Máu Điện Lực - Nhanh như điện - Mạnh như lực"],
+["Cao Sư Mẫu: thành lập, đội ca, đội trưởng?","10/10/2007; Khát vọng tuổi trẻ; Nguyễn Thị Đàm Thư"],
+["Cao Sư Mẫu: slogan?","Cao Sư Mẫu - Chúng ta là một gia đình"],
+["Hành Chính: thành lập, đội ca, đội trưởng?","10/5/2008; Võ đường trúc lâm; Lê Bích Phượng"],
+["Hành Chính: slogan?","Sống hết mình - Chinh phục ước mơ"],
+["Thủ Đô: thành lập, đội ca, đội trưởng?","05/06/2016; Đến với con người Việt Nam tôi; Trần Thị Dịu"],
+["Thủ Đô: slogan, ngày truyền thống, số CT toàn trường?","Máu Thủ đô - Sống xứng đáng; 14/4; 2 chương trình"],
+["Du Lịch: thành lập, đội ca, đội trưởng?","15/12/2016; Sát cánh bên nhau; Nguyễn Ngọc Ánh"],
+["Du Lịch: slogan?","Cho đời xanh - Thêm mầm sống"]]
+};
+var names=Object.keys(D),cur=names[0],list=[],i=0,known={};
+var mode="flip",score=0,tried=0;
+try{known=JSON.parse(localStorage.getItem("k085")||"{}")}catch(e){known={}}
+function $(id){return document.getElementById(id)}
+function save(){try{localStorage.setItem("k085",JSON.stringify(known))}catch(e){}}
+function key(c){return c[0]}
+function build(keepOrder){
+  var all=D[cur].slice();
+  if(!keepOrder)list=all;
+  if($("only").checked)list=list.filter(function(c){return !known[key(c)]});
+  i=Math.min(i,Math.max(list.length-1,0));
+  show();
+}
+function show(){
+  var c=list[i];
+  $("card").classList.remove("flip");
+  var all=D[cur],k=all.filter(function(x){return known[key(x)]}).length;
+  $("bar").style.width=(all.length?k*100/all.length:0)+"%";
+  $("cnt").textContent="Đã thuộc "+k+"/"+all.length;
+  if(!c){$("q").textContent="Bạn đã thuộc hết nhóm này.";$("a").textContent="Bỏ chọn “Chỉ thẻ chưa thuộc” để ôn lại.";$("pos").textContent="";$("know").textContent="Đã thuộc";$("quiz").textContent=mode==="quiz"?"Bạn đã thuộc hết nhóm này.":"";return}
+  $("q").textContent=c[0];$("a").textContent=c[1];
+  if(mode==="quiz")quiz(c);
+  $("pos").textContent="Thẻ "+(i+1)+"/"+list.length;
+  var kn=!!known[key(c)];
+  $("know").textContent=kn?"Bỏ đánh dấu":"Đã thuộc";
+  $("know").className=kn?"":"know";
+}
+function sh(a){a=a.slice();for(var j=a.length-1;j>0;j--){var r=Math.floor(Math.random()*(j+1)),t=a[j];a[j]=a[r];a[r]=t}return a}
+function quiz(c){
+  var same=D[cur].map(function(x){return x[1]}).filter(function(x){return x!==c[1]});
+  var d=sh(same).slice(0,3);
+  if(d.length<3){Object.keys(D).forEach(function(n){D[n].forEach(function(x){if(x[1]!==c[1]&&d.indexOf(x[1])<0&&same.indexOf(x[1])<0)d.push(x[1])})});d=sh(d).slice(0,3)}
+  var opts=sh([c[1]].concat(d)),box=$("quiz");
+  box.innerHTML="";
+  var q=document.createElement("p");q.className="qq";q.textContent=c[0];box.appendChild(q);
+  var sc=document.createElement("div");sc.className="sc";sc.textContent="Đúng "+score+"/"+tried;
+  var btns=[];
+  opts.forEach(function(o){
+    var b=document.createElement("button");b.className="opt";b.textContent=o;btns.push(b);
+    b.onclick=function(){
+      tried++;if(o===c[1])score++;
+      btns.forEach(function(x){x.disabled=true;if(x.textContent===c[1])x.classList.add("right")});
+      if(o!==c[1])b.classList.add("wrong");
+      sc.textContent="Đúng "+score+"/"+tried;
+    };
+    box.appendChild(b);
+  });
+  box.appendChild(sc);
+}
+function setMode(m){
+  mode=m;
+  $("m1").setAttribute("aria-pressed",m==="flip");
+  $("m2").setAttribute("aria-pressed",m==="quiz");
+  document.querySelector(".scene").hidden=m==="quiz";
+  $("quiz").hidden=m!=="quiz";
+  if(m==="quiz"){score=0;tried=0}
+  show();
+}
+$("m1").onclick=function(){setMode("flip")};
+$("m2").onclick=function(){setMode("quiz")};
+function tabs(){
+  $("tabs").innerHTML="";
+  names.forEach(function(n){
+    var b=document.createElement("button");b.textContent=n;
+    b.setAttribute("aria-pressed",n===cur);
+    b.onclick=function(){cur=n;i=0;tabs();build()};
+    $("tabs").appendChild(b);
+  });
+}
+function go(d){if(!list.length)return;i=(i+d+list.length)%list.length;show()}
+$("card").onclick=function(){$("card").classList.toggle("flip")};
+$("prev").onclick=function(){go(-1)};
+$("next").onclick=function(){go(1)};
+$("know").onclick=function(){
+  var c=list[i];if(!c)return;
+  if(known[key(c)])delete known[key(c)];else{known[key(c)]=1;save();
+    if($("only").checked){list.splice(i,1);i=Math.min(i,list.length-1);show();return}
+    go(1);return}
+  save();show();
+};
+$("shuf").onclick=function(){
+  for(var j=list.length-1;j>0;j--){var r=Math.floor(Math.random()*(j+1)),t=list[j];list[j]=list[r];list[r]=t}
+  i=0;show();
+};
+$("only").onchange=function(){i=0;build()};
+$("reset").onclick=function(){known={};save();build()};
+document.onkeydown=function(e){
+  if(e.key==="ArrowRight")go(1);
+  else if(e.key==="ArrowLeft")go(-1);
+  else if(e.key===" "&&e.target.tagName!=="BUTTON"&&e.target.tagName!=="INPUT"){e.preventDefault();$("card").classList.toggle("flip")}
+};
+tabs();build();
+</script>
+</body>
+</html>
